@@ -1,7 +1,7 @@
 geoip-service
 =============
 
-A fast in-memory http service for looking up MaxMind GeoIP2 and GeoLite2 database.
+A fast in-memory http microservice for looking up MaxMind GeoIP2 and GeoLite2 database.
 
 This allows you to have your own IP to location lookup.
 
@@ -10,10 +10,14 @@ This implementation has been tested and handles more than 30,000(uncached)/70,00
 #Prerequisites
 Requires a [go installation](https://golang.org/dl/).
 
-[GeoLite 2](http://dev.maxmind.com/geoip/geoip2/geolite2/) database. Download the "MaxMind DB binary, gzipped" and unpack it.
+A Database (choose one):
+* [Free GeoLite 2 database](http://dev.maxmind.com/geoip/geoip2/geolite2/). Download the "MaxMind DB binary, gzipped" and unpack it.
+* [GeoIP2 Downloadable Database](http://dev.maxmind.com/geoip/geoip2/downloadable/). This is a more detailed databse and should be compatible, but since I don't have access to that, I have been unable to verify this.
 
 ##Building the service
 ```go get github.com/klauspost/geoip-service```
+
+This should build a "geoip-service" executable in your gopath.
 
 ##Running the service
 Unpack the database to your current directory. Execute ```geoip-service -db=GeoLite2-City.mmdb```. This will start the service on port 5000 on your local computer.
@@ -140,6 +144,8 @@ GET http://localhost:5000/1.2.3.4.5  ->
   "Error": "unable to decode ip"
 }
 ```
+
+For best performance you should utilize "keepalive" on the connection if you have a high throughput to avoid creating a new connection for every request. Consult the documentation on your language of choice for that.
 
 #Credits
 Uses  [GeoIP2 Reader for Go](https://github.com/oschwald/geoip2-golang) for its grunt work. This is the reason it is so fast!
