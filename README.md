@@ -143,5 +143,7 @@ GET http://localhost:5000/1.2.3.4.5  ->
 }
 ```
 
+For best performance you should utilize "keepalive" on the connection if you have a high throughput to avoid creating a new connection for every request. Consult the documentation on your language of choice for that.
+
 #Credits
 Uses  [GeoIP2 Reader for Go](https://github.com/oschwald/geoip2-golang) for its grunt work. This is the reason it is so fast!
