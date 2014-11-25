@@ -25,7 +25,7 @@ func main() {
 	var listen = flag.String("listen", ":5000", "Listen address and port, for instance 127.0.0.1:5000")
 	var threads = flag.Int("threads", runtime.NumCPU(), "Number of threads to use. Defaults to number of detected cores")
 	var pretty = flag.Bool("pretty", false, "Should output be formatted with newlines and intentation")
-	var cacheSecs = flag.Int("cache", 60, "How many seconds should requests be cached. Set to 0 to disable")
+	var cacheSecs = flag.Int("cache", 0, "How many seconds should requests be cached. Set to 0 to disable")
 	flag.Parse()
 
 	runtime.GOMAXPROCS(*threads)

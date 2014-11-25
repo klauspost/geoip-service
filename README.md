@@ -5,7 +5,7 @@ A fast in-memory http service for looking up MaxMind GeoIP2 and GeoLite2 databas
 
 This allows you to have your own IP to location lookup.
 
-This implementation has been tested and handles more than 30,000 requests per second, and uses less than 100MB memory.
+This implementation has been tested and handles more than 30,000(uncached)/70,000(cached) requests per second, and uses less than 100MB memory with no cache.
 
 #Prerequisites
 Requires a [go installation](https://golang.org/dl/).
@@ -27,7 +27,14 @@ Usage of geoip-service:
   -lookup="city": Specify which value to look up. Can be 'city' or 'country' depending on which database you load.
   -pretty=false: Should output be formatted with newlines and intentation
   -threads=4: Number of threads to use. Defaults to number of detected cores
+  -cache=0: How many seconds should requests be cached. Set to 0 to disable.
+
 ```
+You can experiment with different cache options. It will store the results for a given IP for a number of seconds. That makes cached queries more than twice as fast as the initial lookup.
+
+It will depend on your hardware and query pattern if it gives you a performance boost, and it may very well be faster not to have cache enabled. 
+
+Also note, there is no RAM limit on the number of stores queries, so if you hit it with millions of completely different requests, your RAM use will rise significantly, so use with care.
 
 #Using the service
 
