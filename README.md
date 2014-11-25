@@ -17,6 +17,8 @@ A Database (choose one):
 ##Building the service
 ```go get github.com/klauspost/geoip-service```
 
+This should build a "geoip-service" executable in your gopath.
+
 ##Running the service
 Unpack the database to your current directory. Execute ```geoip-service -db=GeoLite2-City.mmdb```. This will start the service on port 5000 on your local computer.
 
