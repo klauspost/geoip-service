@@ -7,6 +7,10 @@ This allows you to have your own IP to location lookup.
 
 This implementation has been tested and handles more than 30,000(uncached)/70,000(cached) requests per second, and uses less than 100MB memory with no cache.
 
+[![Build Status][1]][2]
+[1]: https://travis-ci.org/klauspost/geoip-service.svg
+[2]: https://travis-ci.org/klauspost/geoip-service
+
 #Prerequisites
 Requires a [go installation](https://golang.org/dl/).
 
