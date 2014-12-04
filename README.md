@@ -22,6 +22,18 @@ This should build a "geoip-service" executable in your gopath.
 ##Running the service
 Unpack the database to your current directory. Execute ```geoip-service -db=GeoLite2-City.mmdb```. This will start the service on port 5000 on your local computer.
 
+##Using Docker
+This project includes a Dockerfile. Place the source code and the .mmdb in the current directory.
+
+To build the docker image, run:
+```docker build -t geoip-service .```
+
+To expose the service to other docker applications, assuming your database name is GeoLite2-City.mmdb run:
+```docker run -it --rm geoip-service app db="GeoLite2-City.mmdb"```
+
+To map the service to a port on your docker machine, run:
+```docker run -it --rm -p 127.0.0.1:5000:5000 geoip-service app db="GeoLite2-City.mmdb"```
+
 #Service Options
 
 ```
