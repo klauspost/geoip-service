@@ -39,9 +39,11 @@ Therefor, if you have placed the database at ```/local/GeoLite2-City.mmdb```, yo
 ```docker run --rm -v /local/GeoLite2-City.mmdb:/data/geodb.mmdb klauspost/geoip-service"```
 
 To map the service to port 3000 on your host, run:
+
 ```docker run --rm -p 127.0.0.1:3000:5000 -v /local/GeoLite2-City.mmdb:/data/geodb.mmdb klauspost/geoip-service"```
 
 If you want to specify additional command line parameters, you can run the program like this:
+
 ```docker run --rm -p 127.0.0.1:3000:5000 -v /local/GeoLite2-City.mmdb:/data/geodb.mmdb klauspost/geoip-service app db="/data/geodb.mmdb" pretty=true```
 
 
