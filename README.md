@@ -27,16 +27,23 @@ This should build a "geoip-service" executable in your gopath.
 Unpack the database to your current directory. Execute ```geoip-service -db=GeoLite2-City.mmdb```. This will start the service on port 5000 on your local computer.
 
 ##Using Docker
-This project includes a Dockerfile. Place the source code and the .mmdb in the current directory.
+There is a [Docker Repository](https://registry.hub.docker.com/u/klauspost/geoip-service/) set up to easily deploy the service as a docker app.
 
-To build the docker image, run:
-```docker build -t geoip-service .```
+To fetch the docker image, run:
+```docker pull klauspost/geoip-service```
 
-To expose the service to other docker applications, assuming your database name is GeoLite2-City.mmdb run:
-```docker run -it --rm geoip-service app db="GeoLite2-City.mmdb"```
+To get the server running, you must add the geo-database as a volume to /data/geodb. That will enable you to update the file without rebuilding the docker image.
 
-To map the service to a port on your docker machine, run:
-```docker run -it --rm -p 127.0.0.1:5000:5000 geoip-service app db="GeoLite2-City.mmdb"```
+Therefor, if you have placed the database at ```/local/GeoLite2-City.mmdb```, you can run the service at:
+
+```docker run --rm -v /local/GeoLite2-City.mmdb:/data/geodb.mmdb klauspost/geoip-service"```
+
+To map the service to port 3000 on your host, run:
+```docker run --rm -p 127.0.0.1:3000:5000 -v /local/GeoLite2-City.mmdb:/data/geodb.mmdb klauspost/geoip-service"```
+
+If you want to specify additional command line parameters, you can run the program like this:
+```docker run --rm -p 127.0.0.1:3000:5000 -v /local/GeoLite2-City.mmdb:/data/geodb.mmdb klauspost/geoip-service app db="/data/geodb.mmdb" pretty=true```
+
 
 #Service Options
 

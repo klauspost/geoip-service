@@ -1,8 +1,7 @@
 FROM golang:1.3-onbuild
-
-COPY *.mmdb .
-
-#RUN curl -O http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.mmdb.gz
-#RUN gunzip GeoLite2-City.mmdb.gz
+MAINTAINER Klaus Post <klauspost@gmail.com>
 
 EXPOSE 5000
+
+CMD ["app", "-db=/data/geodb.mmdb"]
+VOLUME /data/geodb.mmdb
