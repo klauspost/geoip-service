@@ -13,6 +13,8 @@ import (
 	"time"
 )
 
+//go:generate ffjson $GOFILE
+
 type Response struct {
 	Data   interface{} `json:",omitempty"`
 	Error  string      `json:",omitempty"`
@@ -57,10 +59,13 @@ func main() {
 
 		// Prepare the response and queue sending the result.
 		res := &Response{}
+
 		defer func() {
 			var j []byte
 			var err error
-			if prettyL {
+			if res.cached {
+				j = res.Data.([]byte)
+			} else if prettyL {
 				j, err = json.MarshalIndent(res, "", "  ")
 			} else {
 				j, err = json.Marshal(res)
@@ -88,7 +93,7 @@ func main() {
 			v, found := memCache.Get(ipText)
 			if found {
 				res.cached = true
-				res.Data = json.RawMessage(v.([]byte))
+				res.Data = v
 				return
 			}
 		}

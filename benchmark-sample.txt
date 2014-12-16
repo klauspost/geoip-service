@@ -1,6 +1,6 @@
 NO CACHE:
 
-c:\temp\ab>ab -n 1000000 -c 50 -k http://127.0.0.1:5000/5.6.7.8
+c:\temp\ab>ab -n 1000000 -c 100 -k http://127.0.0.1:5000/5.6.7.8
 This is ApacheBench, Version 2.3 <$Revision: 1604373 $>
 Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
 Licensed to The Apache Software Foundation, http://www.apache.org/
@@ -24,42 +24,42 @@ Server Hostname:        127.0.0.1
 Server Port:            5000
 
 Document Path:          /5.6.7.8
-Document Length:        1463 bytes
+Document Length:        924 bytes
 
-Concurrency Level:      50
-Time taken for tests:   32.225 seconds
+Concurrency Level:      100
+Time taken for tests:   34.553 seconds
 Complete requests:      1000000
 Failed requests:        0
 Keep-Alive requests:    1000000
-Total transferred:      1606000000 bytes
-HTML transferred:       1463000000 bytes
-Requests per second:    31031.81 [#/sec] (mean)
-Time per request:       1.611 [ms] (mean)
-Time per request:       0.032 [ms] (mean, across all concurrent requests)
-Transfer rate:          48669.03 [Kbytes/sec] received
+Total transferred:      1066000000 bytes
+HTML transferred:       924000000 bytes
+Requests per second:    28940.72 [#/sec] (mean)
+Time per request:       3.455 [ms] (mean)
+Time per request:       0.035 [ms] (mean, across all concurrent requests)
+Transfer rate:          30127.74 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
 Connect:        0    0   0.0      0       1
-Processing:     0    2   1.2      1      79
-Waiting:        0    2   1.2      1      79
-Total:          0    2   1.2      1      79
+Processing:     0    3   1.0      4      78
+Waiting:        0    3   1.0      4      78
+Total:          0    3   1.0      4      78
 
 Percentage of the requests served within a certain time (ms)
-  50%      1
-  66%      2
-  75%      2
-  80%      2
-  90%      2
-  95%      3
-  98%      5
-  99%      6
- 100%     79 (longest request)
-
-CACHED: 
+  50%      4
+  66%      4
+  75%      4
+  80%      4
+  90%      4
+  95%      5
+  98%      7
+  99%      8
+ 100%     78 (longest request)
 
 
-c:\temp\ab>ab -n 1000000 -c 50 -k http://127.0.0.1:5000/5.6.7.8
+100% CACHED: 
+
+c:\temp\ab>ab -n 1000000 -c 100 -k http://127.0.0.1:5000/5.6.7.8
 This is ApacheBench, Version 2.3 <$Revision: 1604373 $>
 Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
 Licensed to The Apache Software Foundation, http://www.apache.org/
@@ -83,26 +83,26 @@ Server Hostname:        127.0.0.1
 Server Port:            5000
 
 Document Path:          /5.6.7.8
-Document Length:        1243 bytes
+Document Length:        924 bytes
 
-Concurrency Level:      50
-Time taken for tests:   13.815 seconds
+Concurrency Level:      100
+Time taken for tests:   8.729 seconds
 Complete requests:      1000000
 Failed requests:        0
 Keep-Alive requests:    1000000
-Total transferred:      1386000000 bytes
-HTML transferred:       1243000000 bytes
-Requests per second:    72385.09 [#/sec] (mean)
-Time per request:       0.691 [ms] (mean)
-Time per request:       0.014 [ms] (mean, across all concurrent requests)
-Transfer rate:          97974.35 [Kbytes/sec] received
+Total transferred:      1066000000 bytes
+HTML transferred:       924000000 bytes
+Requests per second:    114559.24 [#/sec] (mean)
+Time per request:       0.873 [ms] (mean)
+Time per request:       0.009 [ms] (mean, across all concurrent requests)
+Transfer rate:          119257.96 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
 Connect:        0    0   0.0      0       1
-Processing:     0    1   0.7      1      24
-Waiting:        0    1   0.7      1      24
-Total:          0    1   0.7      1      24
+Processing:     0    1   0.4      1      16
+Waiting:        0    1   0.4      1      16
+Total:          0    1   0.4      1      16
 
 Percentage of the requests served within a certain time (ms)
   50%      1
@@ -112,6 +112,5 @@ Percentage of the requests served within a certain time (ms)
   90%      1
   95%      2
   98%      2
-  99%      3
- 100%     24 (longest request)
- 
+  99%      2
+ 100%     16 (longest request)
