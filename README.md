@@ -70,7 +70,8 @@ Also note, there is no RAM limit on the number of stores queries, so if you hit 
 Once the service is running, point your browser to ```http://localhost:5000/1.2.3.4```. You can replace "1.2.3.4" with the IP you would like to look up.
 
 Currently the request above yields the following with "GeoLite2-City.mmdb" with the "pretty" option enabled:
-```
+
+```JSON
 {
   "Data": {
     "City": {
