@@ -5,7 +5,7 @@ A fast in-memory http microservice for looking up MaxMind GeoIP2 and GeoLite2 da
 
 This allows you to have your own IP to location lookup.
 
-This implementation has been tested and handles more than 30,000(uncached)/70,000(cached) requests per second, and uses less than 100MB memory with no cache.
+This implementation has been tested and handles more than 30,000(uncached)/110,000(cached) requests per second, and uses less than 100MB memory with no cache.
 
 [![Build Status][1]][2]
 [1]: https://travis-ci.org/klauspost/geoip-service.svg
