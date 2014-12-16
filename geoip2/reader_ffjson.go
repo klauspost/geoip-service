@@ -3,7 +3,7 @@
 // source: reader.go
 // DO NOT EDIT!
 
-package main
+package geoip2
 
 import (
 	"bytes"

@@ -2,6 +2,8 @@
 //
 // See GEOIP-LIBRARY-LICENSE for license on this file
 //
+// Modified slightly for ffjson
+//
 // Package geoip2 provides a wrapper around the maxminddb package for
 // easy use with the MaxMind GeoIP2 and GeoLite2 databases. The records for
 // the IP address is returned from this package as well-formed structures
@@ -9,7 +11,7 @@
 
 //go:generate ffjson $GOFILE
 
-package main
+package geoip2
 
 import (
 	"net"
