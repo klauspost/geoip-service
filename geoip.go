@@ -54,9 +54,6 @@ func main() {
 
 	http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
 		var ipText string
-		// We don't need the body
-		req.Body.Close()
-
 		// Prepare the response and queue sending the result.
 		res := &Response{}
 
