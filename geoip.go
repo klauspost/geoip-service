@@ -13,12 +13,18 @@ import (
 	"time"
 )
 
-//go:generate ffjson $GOFILE
+//go:generate ffjson --nodecoder $GOFILE
 
-type Response struct {
-	Data   interface{} `json:",omitempty"`
-	Error  string      `json:",omitempty"`
-	cached bool
+// ffjson: nodecoder
+type ResponseCity struct {
+	Data  *geoip2.City `json:",omitempty"`
+	Error string       `json:",omitempty"`
+}
+
+// ffjson: nodecoder
+type ResponseCountry struct {
+	Data  *geoip2.Country `json:",omitempty"`
+	Error string          `json:",omitempty"`
 }
 
 func main() {
@@ -55,22 +61,38 @@ func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
 		var ipText string
 		// Prepare the response and queue sending the result.
-		res := &Response{}
+		var cached []byte
+		var returnError string
+		var result interface{} = nil
 
 		defer func() {
 			var j []byte
 			var err error
-			if res.cached {
-				j = res.Data.([]byte)
-			} else if prettyL {
-				j, err = json.MarshalIndent(res, "", "  ")
+			if cached != nil {
+				j = cached
 			} else {
-				j, err = json.Marshal(res)
+				city, ok := result.(*geoip2.City)
+				if ok {
+					res := ResponseCity{Data: city, Error: returnError}
+					if prettyL {
+						j, err = json.MarshalIndent(res, "", "  ")
+					} else {
+						j, err = res.MarshalJSON()
+					}
+				} else {
+					country, _ := result.(*geoip2.Country)
+					res := ResponseCountry{Data: country, Error: returnError}
+					if prettyL {
+						j, err = json.MarshalIndent(res, "", "  ")
+					} else {
+						j, err = res.MarshalJSON()
+					}
+				}
+				if err != nil {
+					log.Fatal(err)
+				}
 			}
-			if err != nil {
-				log.Fatal(err)
-			}
-			if memCache != nil && !res.cached {
+			if memCache != nil && cached == nil {
 				memCache.Set(ipText, j, 0)
 			}
 			w.Write(j)
@@ -82,32 +104,29 @@ func main() {
 		}
 		ip := net.ParseIP(ipText)
 		if ip == nil {
-			res.Error = "unable to decode ip"
+			returnError = "unable to decode ip"
 			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
 		if memCache != nil {
 			v, found := memCache.Get(ipText)
 			if found {
-				res.cached = true
-				res.Data = v
+				cached = v.([]byte)
 				return
 			}
 		}
 		if lookupCity {
-			result, err := db.City(ip)
+			result, err = db.City(ip)
 			if err != nil {
-				res.Error = err.Error()
+				returnError = err.Error()
 				return
 			}
-			res.Data = result
 		} else {
-			result, err := db.Country(ip)
+			result, err = db.Country(ip)
 			if err != nil {
-				res.Error = err.Error()
+				returnError = err.Error()
 				return
 			}
-			res.Data = result
 		}
 	})
 
