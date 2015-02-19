@@ -5,7 +5,7 @@ docker build --tag="gocross" .
 docker run  --rm -it -v "$(pwd)":/usr/src/myapp -w /usr/src/myapp gocross
 
 mkdir build
-cp geoip-linux-amd64-static build/geoip-linux-amd64-static
+cp geoip-linux-amd64 build/geoip-linux-amd64
 cp Dockerfile-build build/Dockerfile
 cd build
 docker rmi geoip-service

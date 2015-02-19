@@ -36,10 +36,3 @@ export GOOS=netbsd
 go build -v -o geoip-$GOOS-$GOARCH
 export GOOS=dragonfly
 go build -v -o geoip-$GOOS-$GOARCH
-
-export CGO_ENABLED=0
-export GOOS=linux
-export GOARCH=386
-go build -a -v -o geoip-$GOOS-$GOARCH-static -ldflags '-s'
-export GOARCH=amd64
-go build -a -v -o geoip-$GOOS-$GOARCH-static -ldflags '-s'

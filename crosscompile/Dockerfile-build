@@ -1,5 +1,5 @@
-FROM scratch
-COPY geoip-linux-amd64-static /geoip-service
+FROM daaku/goruntime
+COPY geoip-linux-amd64 /geoip-service
 
 EXPOSE 5000
 
