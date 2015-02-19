@@ -9,7 +9,7 @@
 // the IP address is returned from this package as well-formed structures
 // that match the internal layout of data from MaxMind.
 
-//go:generate ffjson $GOFILE
+//go:generate ffjson --nodecoder $GOFILE
 
 package geoip2
 
