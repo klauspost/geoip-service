@@ -34,6 +34,9 @@ func main() {
 	var threads = flag.Int("threads", runtime.NumCPU(), "Number of threads to use. Defaults to number of detected cores")
 	var pretty = flag.Bool("pretty", false, "Should output be formatted with newlines and intentation")
 	var cacheSecs = flag.Int("cache", 0, "How many seconds should requests be cached. Set to 0 to disable")
+	var originPolicy = flag.String("origin", "*", `Value sent in the 'Access-Control-Allow-Origin' header. Set to "" to disable.`)
+	serverStart := time.Now().Format(http.TimeFormat)
+
 	flag.Parse()
 
 	runtime.GOMAXPROCS(*threads)
@@ -97,6 +100,13 @@ func main() {
 			}
 			w.Write(j)
 		}()
+
+		// Set headers
+		if *originPolicy != "" {
+			w.Header().Set("Access-Control-Allow-Origin", *originPolicy)
+		}
+		w.Header().Set("Content-Type", "application/json")
+		w.Header().Set("Last-Modified", serverStart)
 
 		ipText = req.URL.Query().Get("ip")
 		if ipText == "" {
