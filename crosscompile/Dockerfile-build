@@ -1,0 +1,7 @@
+FROM scratch
+COPY geoip-linux-amd64-static /geoip-service
+
+EXPOSE 5000
+
+CMD ["/geoip-service", "-db=/data/geodb.mmdb"]
+VOLUME /data/geodb.mmdb
