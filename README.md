@@ -19,7 +19,7 @@ A Database (choose one):
 * [GeoIP2 Downloadable Database](http://dev.maxmind.com/geoip/geoip2/downloadable/). This is a more detailed database and should be compatible, but since I don't have access to that, I have been unable to verify this.
 
 ##Building the service
-```go get github.com/klauspost/geoip-service```
+`go get github.com/klauspost/geoip-service`
 
 This should build a "geoip-service" executable in your gopath.
 ##Binary distributions
@@ -27,27 +27,27 @@ This should build a "geoip-service" executable in your gopath.
 You can download binaries for Windows, Linux, OS X and BSD platforms on the [Releases page](https://github.com/klauspost/geoip-service/releases).
 
 ##Running the service
-Unpack the database to your current directory. Execute ```geoip-service -db=GeoLite2-City.mmdb```. This will start the service on port 5000 on your local computer.
+Unpack the database to your current directory. Execute `geoip-service -db=GeoLite2-City.mmdb`. This will start the service on port 5000 on your local computer.
 
 ##Using Docker
 There is a [Docker Repository](https://registry.hub.docker.com/u/klauspost/geoip-service/) set up to easily deploy the service as a docker app.
 
 To fetch the docker image, run:
-```docker pull klauspost/geoip-service```
+`docker pull klauspost/geoip-service`
 
 To get the server running, you must add the geo-database as a volume to /data/geodb. That will enable you to update the file without rebuilding the docker image.
 
-Therefor, if you have placed the database at ```/local/GeoLite2-City.mmdb```, you can run the service at:
+Therefor, if you have placed the database at `/local/GeoLite2-City.mmdb`, you can run the service at:
 
-```docker run --rm -v /local/GeoLite2-City.mmdb:/data/geodb.mmdb klauspost/geoip-service"```
+`docker run --rm -v /local/GeoLite2-City.mmdb:/data/geodb.mmdb klauspost/geoip-service`
 
 To map the service to port 3000 on your host, run:
 
-```docker run --rm -p 127.0.0.1:3000:5000 -v /local/GeoLite2-City.mmdb:/data/geodb.mmdb klauspost/geoip-service"```
+`docker run --rm -p 127.0.0.1:3000:5000 -v /local/GeoLite2-City.mmdb:/data/geodb.mmdb klauspost/geoip-service`
 
 If you want to specify additional command line parameters, you can run the program like this:
 
-```docker run --rm -p 127.0.0.1:3000:5000 -v /local/GeoLite2-City.mmdb:/data/geodb.mmdb klauspost/geoip-service app db="/data/geodb.mmdb" pretty=true```
+`docker run --rm -p 127.0.0.1:3000:5000 -v /local/GeoLite2-City.mmdb:/data/geodb.mmdb klauspost/geoip-service app -db="/data/geodb.mmdb" -pretty=true`
 
 
 #Service Options
@@ -60,8 +60,8 @@ Usage of geoip-service:
   -pretty=false: Should output be formatted with newlines and intentation
   -threads=4: Number of threads to use. Defaults to number of detected cores
   -cache=0: How many seconds should requests be cached. Set to 0 to disable.
-
 ```
+
 You can experiment with different cache options. It will store the results for a given IP for a number of seconds. That makes cached queries more than twice as fast as the initial lookup.
 
 It will depend on your hardware and query pattern if it gives you a performance boost, and it may very well be faster not to have cache enabled. 
@@ -70,7 +70,7 @@ Also note, there is no RAM limit on the number of stores queries, so if you hit 
 
 #Using the service
 
-Once the service is running, point your browser to ```http://localhost:5000/1.2.3.4```. You can replace "1.2.3.4" with the IP you would like to look up.
+Once the service is running, point your browser to `http://localhost:5000/1.2.3.4`. You can replace "1.2.3.4" with the IP you would like to look up.
 
 Currently the request above yields the following with "GeoLite2-City.mmdb" with the "pretty" option enabled:
 
